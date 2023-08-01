@@ -22,7 +22,7 @@ of comparison used was the 5-time average execution time over each number of ite
 
 
 ## Compiling the Fortran source code (your mileage may vary)
-## I compiled the Fortran code on a Cray machine running SUSE Linux Enterprise Server 15 SP3
+I compiled the Fortran code on a Cray machine running SUSE Linux Enterprise Server 15 SP3.
 
 #### Here is my process of events.
 initialize conda through loading a bash script with the stuff from conda init
