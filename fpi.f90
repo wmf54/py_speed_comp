@@ -4,7 +4,6 @@ module fpi
 
         ! Subroutine one uses a do-loop
         subroutine dofpi(n, cpi)
-            implicit none
             intent(in) n
             intent(out) cpi
             integer :: n, i
@@ -41,7 +40,6 @@ module fpi
 
         ! Subroutine two uses vectorized array broadcasting
         subroutine vfpi(n, cpi)
-            implicit none
             intent(in) n
             intent(out) cpi
             integer :: n
@@ -69,5 +67,8 @@ module fpi
             cpi = (4 * (n_circle / n_square))
 
         end subroutine
+
+
+
 
 end module 
