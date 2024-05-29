@@ -139,8 +139,8 @@ if __name__ == '__main__':
 
     plt.rcParams.update({'font.size': 24})  # set the font size
 
-    # taking one value and not averaging
-    tm_avg = 5
+    # taking one value or average multiple executions
+    tm_avg = 1
     # generate iterations up to 1Emag
     mag = 7
 
