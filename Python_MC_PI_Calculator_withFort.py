@@ -141,12 +141,12 @@ if __name__ == '__main__':
 
     # taking one value and not averaging
     tm_avg = 5
-    # generate iterations up to 10Emag
+    # generate iterations up to 1Emag
     mag = 7
 
     # generate the points to iterate over
-    iter_arr = np.logspace(1, mag, 100)
-
+    iter_arr = np.logspace(1, mag, 25)
+    
     # set some lists of stuff like labels for plotting, the functions, and colors for plotting
     labels = ['Python', 'Vectorized Python', 'Numba Python', 'Vectorized Numba Python', 'Fortran (f2py)', 'Vectorized Fortran (f2py)', 'Fortran (C-lib)', 'Vectorized Fortran (C-lib)']
     funcs = [est_pi, vec_est_pi, jit_est_pi, jit_vec_est_pi, fpi.dofpi, fpi.vfpi, fpi_cpy.fpi, fpi_cpy.vfpi]
@@ -162,8 +162,8 @@ if __name__ == '__main__':
         ax.plot(time_arr[:, 0], time_arr[:, 1], marker='x', color=color, label=lbl)
 
     # Just the fast ones a little further
-    # New iteration array that extends from 10Emag to 10E(mag+2)
-    iter_arr = np.logspace(mag, mag + 1, 100)
+    # New iteration array that extends from 1Emag to 10E(mag+2)
+    iter_arr = np.logspace(mag, mag + 1, 10)
 
     # set some lists of stuff like labels for plotting, the functions, and colors for plotting
     labels = ['Vectorized Python', 'Numba Python', 'Vectorized Numba Python', 'Fortran (f2py)', 'Vectorized Fortran (f2py)', 'Fortran (C-lib)', 'Vectorized Fortran (C-lib)']
@@ -178,8 +178,10 @@ if __name__ == '__main__':
         ax.plot(time_arr[:, 0], time_arr[:, 1], marker='x', color=color)
 
     # set plot scales, lebels, etc.
+    xlims = ax.get_xlim()
+    ax.set_xlim((10e3, xlims[-1]))
     ax.set_xscale('log')
-    ax.set_xlabel('Number of Iterations')
+    ax.set_xlabel('Number of Points')
     ax.set_ylabel('Average Time to Execute, msec')
     ax.legend(fontsize=18)
     fig.set_size_inches(12,8)
