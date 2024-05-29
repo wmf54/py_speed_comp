@@ -16,30 +16,36 @@ of comparison used was the 5-time average execution time over each number of ite
 - Vectorized Python with Numba JIT
 - Fortran compiled for Python with f2py
 - Vectorized Fortran compiled for Pyton with f2py
+- Fortran compiled into a .so file using the iso_c_binding module
+- Vectorized Fortran compiled into a .so file using the iso_c_binding module
 
 ## The results are in the figure below.
 ![Alt text of the image](https://github.com/wmf54/py_speed_comp/blob/main/Timing_Image_V2.png)
 
 
-## Compiling the Fortran source code (your mileage may vary)
-I compiled the Fortran code on a Cray machine running SUSE Linux Enterprise Server 15 SP3.
+#### Differences in the Fortran implementations
+Both Fortran implementations come from the same source code file, and the same
+Fortran module and the same two subroutines. The difference is in the way they are
+compiled into a Python importable module file. A common way for interfacing libraries
+coded in other languages with Python is to use tools that automatically generate modules or
+wrapper functions, like SWIG. f2py is a tool packaged with numpy that automatically
+generates interfaces between Fortran and Python. However, modern Fortran also facilitates
+interfacing with C more directly throught the iso_c_binding module. Python interfaces with C
+modules natively through the built-in ctypes module. Both of these latter two options are explored.
+The benefits of f2py come in the relative ease-of-use (the automation of it). While the Fortran C
+interface benefits from directo support through the Fortran language developers and Python
+developers via the both's goal for an ease of interfacing with C modules. However, more explicit
+care with typing is required through this path. The file `fpi_cpy.py` handles the Python side
+for dealing with the explicit C-typing.
 
-#### Here is my process of events.
-initialize conda through loading a bash script with the stuff from conda init
 
-`source ~/Bash_Scripts/init_conda`
+## Compiling the Fortran source code
+The code was compiled using Windows Subsystem for Linux (WSL).
+A makefile is provided that was used to build the modules used.
+Here are versions used:
+Ubuntu 22.04.2 LTS
+gfortran 11.4.0
+Python 3.10.12
+numpy 1.24.4
 
-activate my conda environment with 
-
-`conda activate ~/venvs/exo_env`
-
-swap programming environment to gain access to gnu compiler
-`module swap PrgEnv-cray/6.0.10 PrgEnv-gnu` 
-
-compile the source code for Python using gnu compiler. f2py should be able to find the compiler itself if everythin is done right
-
-`f2py -c fpi.f90 -m fpi`
-
-Check that it is importable and functioning. 
-
-`python -c "from fpi import fpi; print(fpi.dofpi(1000)), print(fpi.vfpi(1000))"`
+#### Use make to build the library files
