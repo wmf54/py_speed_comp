@@ -7,6 +7,15 @@ use these subroutines directly without the need for f2py or another tool.
 import ctypes as ct
 
 
+def config():
+    """ for setting the configurations in one spot"""
+    # c data types, must correspond with fortran code
+    inttype = ct.c_int64
+    floattype = ct.c_double
+    # location of the object file
+    flib = ct.CDLL('./fpi_c.so')
+    return inttype, floattype, flib
+
 def fpi(n):
     """ Wrapper for fpi.f90 circumventing f2py
     :param n: the number of points to examine
@@ -14,20 +23,19 @@ def fpi(n):
     :return: an estimation of pi
     :rtype: float
     """
-    # location of the object file
-    flib = ct.CDLL('./fpi_c.so')
+    inttype, floattype, flib = config()
 
     # the desired subroutine to use
     fpic = flib.dofpi
 
     # initializing pi since this uses a subroutine
-    cpi= ct.c_double(0.0)
+    cpi= floattype(0.0)
 
     # explicitly define the expected types 
-    fpic.argtypes = (ct.POINTER(ct.c_int32), ct.POINTER(ct.c_double))
+    fpic.argtypes = (ct.POINTER(inttype), ct.POINTER(floattype))
 
     # execute the subroutine
-    fpic(ct.c_int32(n), cpi)
+    fpic(inttype(n), cpi)
     
     # return the value of a pi as a python float
     return cpi.value
@@ -39,21 +47,19 @@ def vfpi(n):
     :return: an estimation of pi
     :rtype: float
     """
-
-    # location of the object file    
-    flib = ct.CDLL('./fpi_c.so')
+    inttype, floattype, flib = config()
 
     # the desired subroutine to use
     fpic = flib.vfpi
 
     # initializing pi since this uses a subroutine    
-    cpi= ct.c_double(0.0)
+    cpi= floattype(0.0)
 
     # explicitly define the expected types     
-    fpic.argtypes = (ct.POINTER(ct.c_int32), ct.POINTER(ct.c_double))
+    fpic.argtypes = (ct.POINTER(inttype), ct.POINTER(floattype))
 
     # execute the subroutine
-    fpic(ct.c_int32(n), cpi)
+    fpic(inttype(n), cpi)
     
     # return the value of a pi as a python float
     return cpi.value
