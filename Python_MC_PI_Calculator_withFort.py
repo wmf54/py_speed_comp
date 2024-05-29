@@ -3,6 +3,7 @@ import random
 import time
 from numba import jit
 from fpi import fpi
+import fpi_cpy
 
 def est_pi(n_iters):
     """
@@ -139,7 +140,7 @@ if __name__ == '__main__':
     plt.rcParams.update({'font.size': 24})  # set the font size
 
     # taking one value and not averaging
-    tm_avg = 1
+    tm_avg = 5
     # generate iterations up to 10Emag
     mag = 7
 
@@ -147,9 +148,9 @@ if __name__ == '__main__':
     iter_arr = np.logspace(1, mag, 100)
 
     # set some lists of stuff like labels for plotting, the functions, and colors for plotting
-    labels = ['Python', 'Vectorized Python', 'Numba Python', 'Vectorized Numba Python', 'Fortran', 'Vectorized Fortran']
-    funcs = [est_pi, vec_est_pi, jit_est_pi, jit_vec_est_pi, fpi.dofpi, fpi.vfpi]
-    colors = ['darkgreen', 'limegreen', 'darkblue', 'cyan', 'darkred', 'magenta']
+    labels = ['Python', 'Vectorized Python', 'Numba Python', 'Vectorized Numba Python', 'Fortran (f2py)', 'Vectorized Fortran (f2py)', 'Fortran (C-lib)', 'Vectorized Fortran (C-lib)']
+    funcs = [est_pi, vec_est_pi, jit_est_pi, jit_vec_est_pi, fpi.dofpi, fpi.vfpi, fpi_cpy.fpi, fpi_cpy.vfpi]
+    colors = ['darkgreen', 'limegreen', 'darkblue', 'cyan', 'darkred', 'magenta', 'orange', 'blue']
 
     # initialize the plot objects
     fig, ax = plt.subplots()
@@ -165,9 +166,9 @@ if __name__ == '__main__':
     iter_arr = np.logspace(mag, mag + 1, 100)
 
     # set some lists of stuff like labels for plotting, the functions, and colors for plotting
-    labels = ['Vectorized Python', 'Numba Python', 'Vectorized Numba Python', 'Fortran', 'Vectorized Fortran']
-    funcs = [vec_est_pi, jit_est_pi, jit_vec_est_pi, fpi.dofpi, fpi.vfpi]
-    colors = ['limegreen', 'darkblue', 'cyan', 'darkred', 'magenta']
+    labels = ['Vectorized Python', 'Numba Python', 'Vectorized Numba Python', 'Fortran (f2py)', 'Vectorized Fortran (f2py)', 'Fortran (C-lib)', 'Vectorized Fortran (C-lib)']
+    funcs = [vec_est_pi, jit_est_pi, jit_vec_est_pi, fpi.dofpi, fpi.vfpi, fpi_cpy.fpi, fpi_cpy.vfpi]
+    colors = ['limegreen', 'darkblue', 'cyan', 'darkred', 'magenta', 'orange', 'blue']
 
     # loop over and time each function
     for func, lbl, color in zip(funcs, labels, colors):
@@ -180,5 +181,7 @@ if __name__ == '__main__':
     ax.set_xscale('log')
     ax.set_xlabel('Number of Iterations')
     ax.set_ylabel('Average Time to Execute, msec')
-    ax.legend()
-    plt.show()
+    ax.legend(fontsize=18)
+    fig.set_size_inches(12,8)
+    fig.tight_layout()
+    fig.savefig('Timing_Image.png')
