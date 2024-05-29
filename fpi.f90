@@ -2,7 +2,7 @@
 ! compilation as a module to import and use in Python. Uses C-types and bind() to allow for 
 ! direct import and use in Python with Python built-in ctypes module.
 module fpi
-    use, intrinsic :: iso_c_binding, only: rk => c_double, ik => c_int32_t
+    use, intrinsic :: iso_c_binding, only: rk => c_double, ik => c_int64_t
     implicit none
     contains
 
@@ -30,12 +30,12 @@ module fpi
                 ! any less than or equal to 1 are in the circle
                 if (r<=1_rk) then
                     n_circle = n_circle + 1_rk
-                endif
+                end if
 
                 ! all fall in the square
                 n_square = n
                 
-            enddo
+            end do
 
             ! estimate pi
             cpi = 4_rk * (n_circle / n_square)
