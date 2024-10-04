@@ -10,7 +10,7 @@ RM := rm -f
 CFLAGS1 = -shared -O3
 CFLAGS2 = --opt='-O3' -c
 
-CCFLAGS1 = -shared -c -fPIC cpp_pi.cpp -o cpp_pi.o
+CCFLAGS1 = -shared -O3 -c -fPIC cpp_pi.cpp -o cpp_pi.o
 CCFLAGS2 = -shared -Wl,-soname,cpp_pi.so -o cpp_pi.so cpp_pi.o
 
 all: 
