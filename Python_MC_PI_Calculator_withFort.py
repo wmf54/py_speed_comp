@@ -4,6 +4,7 @@ import time
 from numba import jit
 from fpi import fpi
 import fpi_cpy
+import cpp_cpy
 
 def est_pi(n_iters):
     """
@@ -146,14 +147,27 @@ if __name__ == '__main__':
 
     # generate the points to iterate over
     iter_arr = np.logspace(1, mag, 25)
-    
-    # set some lists of stuff like labels for plotting, the functions, and colors for plotting
-    labels = ['Python', 'Vectorized Python', 'Numba Python', 'Vectorized Numba Python', 'Fortran (f2py)', 'Vectorized Fortran (f2py)', 'Fortran (C-lib)', 'Vectorized Fortran (C-lib)']
-    funcs = [est_pi, vec_est_pi, jit_est_pi, jit_vec_est_pi, fpi.dofpi, fpi.vfpi, fpi_cpy.fpi, fpi_cpy.vfpi]
-    colors = ['darkgreen', 'limegreen', 'darkblue', 'cyan', 'darkred', 'magenta', 'orange', 'blue']
 
     # initialize the plot objects
     fig, ax = plt.subplots()
+
+    # set some lists of stuff like labels for plotting, the functions, and colors for plotting
+    labels = ['Python', 'Vectorized Python', 
+              'Numba Python', 'Vectorized Numba Python', 
+              'Fortran (f2py)', 'Vectorized Fortran (f2py)', 
+              'Fortran (C-lib)', 'Vectorized Fortran (C-lib)',
+              'C++ (C-lib)']
+    funcs = [est_pi, vec_est_pi, 
+             jit_est_pi, jit_vec_est_pi, 
+             fpi.dofpi, fpi.vfpi, 
+             fpi_cpy.fpi, fpi_cpy.vfpi,
+             cpp_cpy.c_pi]
+    colors = ['darkgreen', 'limegreen', 
+              'darkblue', 'cyan', 
+              'darkred', 'magenta', 
+              'orange', 'blue',
+              'darkorange']
+
     # loop over and time each function
     for func, lbl, color in zip(funcs, labels, colors):
         # time the function
@@ -166,9 +180,21 @@ if __name__ == '__main__':
     iter_arr = np.logspace(mag, mag + 1, 10)
 
     # set some lists of stuff like labels for plotting, the functions, and colors for plotting
-    labels = ['Vectorized Python', 'Numba Python', 'Vectorized Numba Python', 'Fortran (f2py)', 'Vectorized Fortran (f2py)', 'Fortran (C-lib)', 'Vectorized Fortran (C-lib)']
-    funcs = [vec_est_pi, jit_est_pi, jit_vec_est_pi, fpi.dofpi, fpi.vfpi, fpi_cpy.fpi, fpi_cpy.vfpi]
-    colors = ['limegreen', 'darkblue', 'cyan', 'darkred', 'magenta', 'orange', 'blue']
+    labels = ['Vectorized Python', 
+              'Numba Python', 'Vectorized Numba Python', 
+              'Fortran (f2py)', 'Vectorized Fortran (f2py)', 
+              'Fortran (C-lib)', 'Vectorized Fortran (C-lib)',
+              'C++ (C-lib)']
+    funcs = [vec_est_pi, 
+             jit_est_pi, jit_vec_est_pi, 
+             fpi.dofpi, fpi.vfpi, 
+             fpi_cpy.fpi, fpi_cpy.vfpi,
+             cpp_cpy.c_pi]
+    colors = ['limegreen', 
+              'darkblue', 'cyan', 
+              'darkred', 'magenta', 
+              'orange', 'blue',
+              'darkorange']
 
     # loop over and time each function
     for func, lbl, color in zip(funcs, labels, colors):
