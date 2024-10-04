@@ -141,7 +141,7 @@ if __name__ == '__main__':
     plt.rcParams.update({'font.size': 24})  # set the font size
 
     # taking one value or average multiple executions
-    tm_avg = 1
+    tm_avg = 5
     # generate iterations up to 1Emag
     mag = 7
 
@@ -205,7 +205,7 @@ if __name__ == '__main__':
 
     # set plot scales, lebels, etc.
     xlims = ax.get_xlim()
-    ax.set_xlim((10e3, xlims[-1]))
+    ax.set_xlim((10e4, xlims[-1]))
     ax.set_xscale('log')
     ax.set_xlabel('Number of Points')
     ax.set_ylabel('Average Time to Execute, msec')
