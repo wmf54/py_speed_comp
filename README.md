@@ -18,6 +18,7 @@ of comparison used was the 5-time average execution time over each number of ite
 - Vectorized Fortran compiled for Pyton with f2py
 - Fortran compiled into a .so file using the iso_c_binding module
 - Vectorized Fortran compiled into a .so file using the iso_c_binding module
+- C++ code compiled into a shared C lib file
 
 ## The results are in the figure below.
 ![Alt text of the image](https://github.com/wmf54/py_speed_comp/blob/main/Timing_Image_V2.png)
@@ -39,13 +40,12 @@ care with typing is required through this path. The file `fpi_cpy.py` handles th
 for dealing with the explicit C-typing.
 
 
-## Compiling the Fortran source code
+## Compiling the source code
 The code was compiled using Windows Subsystem for Linux (WSL).
 A makefile is provided that was used to build the modules used.
 Here are versions used:
-Ubuntu 22.04.2 LTS
-gfortran 11.4.0
-Python 3.10.12
+Ubuntu 20.04
+gfortran 9.4.0
+g++ 9.4.0
+Python 3.8.10
 numpy 1.24.4
-
-#### Use make to build the library files
