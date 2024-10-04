@@ -166,7 +166,7 @@ if __name__ == '__main__':
               'darkblue', 'cyan', 
               'darkred', 'magenta', 
               'orange', 'blue',
-              'darkorange']
+              'k']
 
     # loop over and time each function
     for func, lbl, color in zip(funcs, labels, colors):
@@ -194,7 +194,7 @@ if __name__ == '__main__':
               'darkblue', 'cyan', 
               'darkred', 'magenta', 
               'orange', 'blue',
-              'darkorange']
+              'k']
 
     # loop over and time each function
     for func, lbl, color in zip(funcs, labels, colors):
