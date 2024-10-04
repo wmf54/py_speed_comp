@@ -44,8 +44,8 @@ for dealing with the explicit C-typing.
 The code was compiled using Windows Subsystem for Linux (WSL).
 A makefile is provided that was used to build the modules used.
 Here are versions used:
-Ubuntu 20.04
-gfortran 9.4.0
-g++ 9.4.0
-Python 3.8.10
-numpy 1.24.4
+- Ubuntu 20.04
+- gfortran 9.4.0
+- g++ 9.4.0
+- Python 3.8.10
+- numpy 1.24.4
