@@ -32,12 +32,11 @@ coded in other languages with Python is to use tools that automatically generate
 wrapper functions, like SWIG. f2py is a tool packaged with numpy that automatically
 generates interfaces between Fortran and Python. However, modern Fortran also facilitates
 interfacing with C more directly throught the iso_c_binding module. Python interfaces with C
-modules natively through the built-in ctypes module. Both of these latter two options are explored.
-The benefits of f2py come in the relative ease-of-use (the automation of it). While the Fortran C
-interface benefits from directo support through the Fortran language developers and Python
-developers via the both's goal for an ease of interfacing with C modules. However, more explicit
-care with typing is required through this path. The file `fpi_cpy.py` handles the Python side
-for dealing with the explicit C-typing.
+modules natively through the built-in ctypes module. The benefits of f2py come in the relative 
+ease-of-use (the automation of it). While the Fortran C interface benefits from direct support 
+through the Fortran language developers and Python developers via both's goal for an ease of 
+interfacing with C modules. However, more explicit care with typing is required. The file 
+`fpi_cpy.py` handles the Python side for dealing with the explicit C-typing.
 
 
 ## Compiling the source code
